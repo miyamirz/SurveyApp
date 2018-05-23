@@ -5,4 +5,4 @@ module.exports = {
 	mongoURI: 'mongodb://root:database@ds129770.mlab.com:29770/survey',
 	cookieKey: 'avlaflkdfsnlkads'
 };
-//cookiekey is a random key
+//cookiekey is a random key you know
