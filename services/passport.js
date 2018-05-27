@@ -25,22 +25,44 @@ passport.use(
 			callbackURL: '/auth/google/callback',
 			proxy: true
 		},
-		(accessToken, refreshToken, profile, done) => {
+		async (accessToken, refreshToken, profile, done) => {
 			console.log('CALLBACK TO GOOGLEOAUTH');
 			// console.log('AccessToken', accessToken);
 			// console.log('RefreshToken', refreshToken);
 			// console.log('pPofile:', profile);
-			User.findOne({ googleId: profile.id }).then(existingUser => {
-				if (existingUser) {
-					console.log('User already exists');
-					done(null, existingUser);
-				} else {
-					console.log('NOT A NEW USER');
-					new User({ googleId: profile.id })
-						.save()
-						.then(user => done(null, user));
-				}
+			const existingUser = await User.findOne({
+				googleId: profile.id
 			});
+
+			if (existingUser) {
+				console.log('User already exists');
+				done(null, existingUser);
+			} else {
+				console.log('NOT A NEW USER');
+				const user = await new User({
+					googleId: profile.id
+				}).save();
+				done(null, user);
+			}
 		}
 	)
 );
+
+//before placing async / await syntax
+(accessToken, refreshToken, profile, done) => {
+	console.log('CALLBACK TO GOOGLEOAUTH');
+	// console.log('AccessToken', accessToken);
+	// console.log('RefreshToken', refreshToken);
+	// console.log('pPofile:', profile);
+	User.findOne({ googleId: profile.id }).then(existingUser => {
+		if (existingUser) {
+			console.log('User already exists');
+			done(null, existingUser);
+		} else {
+			console.log('NOT A NEW USER');
+			new User({ googleId: profile.id })
+				.save()
+				.then(user => done(null, user));
+		}
+	});
+};
