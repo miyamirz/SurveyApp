@@ -28,7 +28,7 @@ require('./routes/billingRoutes')(app);
 
 //Only runs in production
 if (process.env.NODE_ENV === 'production') {
-	console.log('App running in production');
+	console.log('App running in production-------------');
 	//Express will serve up production assets
 	//like our main.js file or main.css file
 	const path = require('path');
@@ -38,6 +38,7 @@ if (process.env.NODE_ENV === 'production') {
 	//it it does not recognize the route
 
 	app.get('*', (req, res) => {
+		console.log('Entered production route-------------');
 		res.sendFile(
 			path.resolve(__dirname, 'client', 'build', 'index.html')
 		);
