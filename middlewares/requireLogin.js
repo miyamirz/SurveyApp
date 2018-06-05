@@ -1,4 +1,5 @@
 module.exports = (req, res, next) => {
+	console.log('In requireLogin');
 	if (!req.user) {
 		return res
 			.status(401)

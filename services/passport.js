@@ -10,6 +10,7 @@ passport.serializeUser((user, done) => {
 	done(null, user.id);
 	console.log('cookie is set here and it is:', user.id);
 });
+//user in set in req here by passport
 passport.deserializeUser((id, done) => {
 	console.log('IN DESERIALIZE', id);
 	User.findById(id).then(user => done(null, user));

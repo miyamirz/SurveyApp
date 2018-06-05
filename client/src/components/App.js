@@ -3,15 +3,17 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 import * as actions from '../actions';
 
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyList = () => <h2>SurveyList</h2>;
+// const SurveyList = () => <h2>SurveyList</h2>;
 
 class App extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
 	}
+	//container class provided by materialize adds on margin to the page and makes look pretty
 	render() {
 		return (
 			<div className="container">
@@ -19,7 +21,16 @@ class App extends Component {
 					<div>
 						<Header />
 						<Route exact path="/" component={Landing} />
-						<Route path="/surveys" component={Dashboard} />
+						<Route
+							exact
+							path="/surveys"
+							component={Dashboard}
+						/>
+						<Route
+							exact
+							path="/surveys/new"
+							component={SurveyNew}
+						/>
 					</div>
 				</BrowserRouter>
 			</div>

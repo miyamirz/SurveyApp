@@ -13,6 +13,8 @@ module.exports = app => {
 	// 		source: req.body.id
 	// 	});
 	// });
+
+	//No need requireLogin be second argument..Any number of function arguments can be present
 	app.post('/api/stripe', requireLogin, async (req, res) => {
 		//No Longer required since middleware requireLogin is used which will be handled by express internally and return
 		// if (!req.user) {
