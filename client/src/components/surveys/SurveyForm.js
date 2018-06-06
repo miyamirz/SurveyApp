@@ -5,12 +5,8 @@ import SurveyField from './SurveyField';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import validateEmails from '../../utils/validateEmails';
-const FIELDS = [
-	{ label: 'Survey Title', name: 'title' },
-	{ label: 'Subject Line', name: 'subject' },
-	{ label: 'Email Body', name: 'body' },
-	{ label: 'Recipients List', name: 'emails' }
-];
+import formFields from './formFields';
+
 class SurveyForm extends Component {
 	renderFields() {
 		// return (
@@ -41,7 +37,7 @@ class SurveyForm extends Component {
 		// 		/>
 		// 	</div>
 		// );
-		return _.map(FIELDS, ({ label, name }) => {
+		return _.map(formFields, ({ label, name }) => {
 			return (
 				<Field
 					key={name}
@@ -95,12 +91,12 @@ function validate(values) {
 
 	//but we utilize lodash to make it clean
 	//You should not write values.name
-	_.each(FIELDS, ({ name }) => {
+	_.each(formFields, ({ name }) => {
 		if (!values[name]) {
 			errors[name] = 'You must provide a value';
 		}
 	});
-	errors.emails = validateEmails(values.emails || '');
+	errors.recipients = validateEmails(values.recipients || '');
 	return errors;
 }
 //validate:validate
